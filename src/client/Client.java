@@ -23,6 +23,11 @@ public class Client {
 
     public static void main(String[] args) {
 
+        if (args.length == 0) {
+            System.out.println("Please provide the required parameters as a command line arguments");
+            return;
+        }
+
         Client client = new Client();
         client.setHttpParameters(args);
 
