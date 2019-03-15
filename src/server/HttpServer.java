@@ -16,7 +16,7 @@ public class HttpServer extends Thread {
 
     private Socket clientObj;
     private BufferedReader inputFromClient = null;
-    private DataOutputStream outputToClient = null;
+    //private DataOutputStream outputToClient = null;
     private static String fileDirectory;
     private String status = null, contentType = "application/json";
     private String[] fileData = new String[10], fileNames = new String[10];
@@ -31,7 +31,7 @@ public class HttpServer extends Thread {
         System.out.println("The client.Client " + clientObj.getInetAddress() + ":"
                 + clientObj.getPort() + " is connected");
 
-        String requestString = null, headerLine, httpMethod = "", httpPathLocal = null, shttpProtocol;
+        String requestString = null, headerLine, httpMethod = "", httpPathLocal = null;
         StringTokenizer tokenizer;
 
         try {
@@ -79,12 +79,7 @@ public class HttpServer extends Thread {
         }
     }
 
-    /**
-     * Send Response to the client
-     * @param statusLine
-     * @throws Exception
-     */
-    private void sendResponse(String statusLine) throws Exception {
+    private void sendResponse(String statusLine) throws IOException {
         String serverDetails = "Server: HTTP Server\r\n";
         String contentLengthLine;
         DateFormat dateFormat = new SimpleDateFormat("E,dd MMM yyyy HH:mm:ss");
@@ -94,7 +89,7 @@ public class HttpServer extends Thread {
         debuggingMsgs("Before Sending Output to client.Client", debuggingOption);
 
         OutputStream os = clientObj.getOutputStream();
-        outputToClient = new DataOutputStream(os);
+        DataOutputStream outputToClient = new DataOutputStream(os);
 
         outputToClient.writeBytes(statusLine);
         outputToClient.writeBytes(serverDetails);
