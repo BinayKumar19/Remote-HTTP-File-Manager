@@ -7,6 +7,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.StringTokenizer;
 
+/**
+ * Http Server acting as a File server
+ *
+ * @author Binay
+ */
 public class HttpServer extends Thread {
 
     private Socket clientObj;
@@ -74,6 +79,11 @@ public class HttpServer extends Thread {
         }
     }
 
+    /**
+     * Send Response to the client
+     * @param statusLine
+     * @throws Exception
+     */
     private void sendResponse(String statusLine) throws Exception {
         String serverDetails = "Server: HTTP Server\r\n";
         String contentLengthLine;
